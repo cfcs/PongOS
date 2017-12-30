@@ -1,0 +1,2 @@
+make clean ; mirage configure -t xen -l framebuffer.qubes:error,qubes.gui:error && \
+make && ../qubes-test-mirage/test-mirage pong.xen mirage-test

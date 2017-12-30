@@ -1,0 +1,14 @@
+S .
+B _build
+
+FLG -w +A-4-18-41-42-44-48-58
+
+PKG mirage
+PKG lwt
+PKG imagelib
+
+PKG mirage-framebuffer
+PKG mirage-framebuffer-imagelib
+
+PKG mirage-qubes
+PKG mirage-framebuffer-qubes
