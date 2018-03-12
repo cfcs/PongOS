@@ -1,0 +1,34 @@
+env:
+  global:
+          - PINS="mirage-framebuffer:https://github.com/cfcs/mirage-framebuffer.git mirage-framebuffer-tsdl:https://github.com/cfcs/mirage-framebuffer.git mirage-framebuffer-imagelib:https://github.com/cfcs/mirage-framebuffer.git mirage-framebuffer-qubes:https://github.com/cfcs/mirage-framebuffer.git"
+    - PACKAGE="pong"
+
+matrix:
+  include:
+      #- os: osx
+      #env: MIRAGE_BACKEND=macosx OCAML_VERSION=4.06
+      #- os: linux
+      #env: MIRAGE_BACKEND=unix OCAML_VERSION=4.04
+      #- os: linux
+      #env: MIRAGE_BACKEND=unix OCAML_VERSION=4.05
+      #- os: linux
+      #env: MIRAGE_BACKEND=unix OCAML_VERSION=4.06
+    - os: linux
+      env: MIRAGE_BACKEND=xen OCAML_VERSION=4.04
+    - os: linux
+      env: MIRAGE_BACKEND=xen OCAML_VERSION=4.05
+    - os: linux
+      env: MIRAGE_BACKEND=xen OCAML_VERSION=4.06
+
+language: c
+install: wget https://raw.githubusercontent.com/ocaml/ocaml-travisci-skeleton/master/.travis-mirage.sh
+sudo: required
+script: bash -ex .travis-mirage.sh
+branches:
+  only:
+    - gh-pages
+    - /.*/
+git:
+  depth: 2
+notifications:
+  email: false

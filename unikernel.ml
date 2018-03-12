@@ -14,7 +14,7 @@ module Main
 =
 struct
 
-module MiragePong(FB : Framebuffer.S)=
+  module MiragePong(FB : Framebuffer.S)=
 struct
   module Img = Framebuffer_image.Make(FB)
 
