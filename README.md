@@ -7,11 +7,13 @@ PongOS, the operating system that satisfies all your multiplayer pong gaming nee
 
 ## What is this?
 
-This is a [MirageOS](https://mirage.io) unikernel written in OCaml.
+This is a [MirageOS](https://mirage.io) unikernel written in OCaml. It's mostly a demonstration / example of working graphics on this platform.
 
 It uses [mirage-framebuffer](https://github.com/cfcs/mirage-framebuffer) to handle the drawing and input handling. It is built on top of the [mirage-qubes](https://github.com/talex5/mirage-qubes) library.
 
 It can run as a Xen unikernel under QubesOS or as an SDL application under Linux/FreeBSD.
+
+If you're also interested in writing games in a functional language, I liked [this brief introduction](http://prog21.dadgum.com/23.html).
 
 ## Gameplay
 

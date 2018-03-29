@@ -109,7 +109,7 @@ struct
     draw fb state >>= fun () -> Lwt.return state
 
   let rec tick fb state =
-    Time.sleep_ns 100_000_L >>= fun () ->
+    Time.sleep_ns 20_000_000_L >>= fun () ->
     let move_player side state =
       let update_player, player =
         (if state.player1.side = side then
@@ -173,14 +173,14 @@ struct
         Lwt.return {state with ball = {ball with x ; y; direction;
                                                  speed = ball.speed +. 0.001}}
       | Some One ->
-        Time.sleep_ns 2_000_000_L >>= fun () -> (* sleep for 2s when score! *)
+        Time.sleep_ns 2_000_000_000_L >>= fun () -> (* sleep for 2s when score! *)
         Lwt.return {state with
                     player1 = {state.player1 with
                                points = state.player1.points + 1 };
                     ball = next_ball Two state.player1.color
                    }
       | Some Two ->
-        Time.sleep_ns 2_000_000_L >>= fun () -> (* sleep for 2s when score! *)
+        Time.sleep_ns 2_000_000_000_L >>= fun () -> (* sleep for 2s when score! *)
         Lwt.return {state with
                     player2 = {state.player2 with
                                points = state.player2.points + 1 } ;
