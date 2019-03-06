@@ -83,9 +83,9 @@ struct
        x = (float_of_int width) /. 2.;
        direction = (Random.float (120./.57.3)) +. (270. /. 57.3)
                    +. (if Random.bool () then 0. else (-180. /. 57.3));
-       size = 6. ;
+       size = 10. ;
        color ;
-       speed = 1. ;
+       speed = 8. ;
       }
 
   let setup fb =
@@ -99,7 +99,7 @@ struct
         side ;
         color ;
         input = Lwt_mvar.create_empty () ;
-        width = 12 ;
+        width = 16 ;
       }
     in
     let player1 = new_player One (FB.compile_rgb ~r:'\xFF' fb) in
@@ -109,7 +109,7 @@ struct
     draw fb state >>= fun () -> Lwt.return state
 
   let rec tick fb state =
-    Time.sleep_ns 20_000_000_L >>= fun () ->
+    Time.sleep_ns 5_000_000_L >>= fun () ->
     let move_player side state =
       let update_player, player =
         (if state.player1.side = side then
@@ -199,8 +199,8 @@ struct
     let rec input_loop fb =
       let open Framebuffer__S in
       FB.recv_event fb >>= function
-      | Window_close -> failwith "window closed" ; Lwt.return_unit
-      | Keypress {pressed = true; keysym; mods; _} as event ->
+      | Window_close -> ignore @@ failwith "window closed" ; Lwt.return_unit
+      | Keypress {pressed = true; keysym; mods; _} as _event ->
         begin match keysym with
           | Some `W -> up player1
           | Some `S -> down player1
@@ -214,7 +214,8 @@ struct
     input_loop fb
 
   let start () =
-    FB.window ~width:500 ~height:500 >>= fun fb ->
+    FB.window ~width:200 ~height:200 >>= fun fb ->
+    FB.resize ~width:900 ~height:1000 fb >>= fun () ->
     setup fb >>= fun state ->
     FB.redraw fb >>= fun () ->
     Lwt.async (fun () -> tick fb state) ;
